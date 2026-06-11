@@ -1,11 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+body {
+    background: #000;
+    overflow: hidden;
+    color: white;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 30;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 26px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.navbar nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #b3b3b3;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.navbar nav a:hover {
+    color: #11f75e;
+    transform: translateY(-2px);
+}
+
+.btn-book {
+    background: #11f75e;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    color: #000;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(17, 247, 94, 0.3);
+}
+
+.btn-book:hover {
+    transform: scale(1.05);
+    background: #15ff63;
+    box-shadow: 0 8px 25px rgba(17, 247, 94, 0.5);
+}
+
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px) brightness(0.45);
+    transition: background-image 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.15);
+    z-index: 1;
+}
+
+.dark-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.85));
+    z-index: 2;
+}
+
+.main-text {
+    position: absolute;
+    top: 16%;
+    text-align: center;
+    z-index: 15;
+    pointer-events: none;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.main-text h1 {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    color: white;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.main-text p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    color: #11f75e;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 540px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    margin-top: 100px;
+}
+
+.card {
+    position: absolute;
+    width: 320px;
+    height: 480px;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    perspective: 1500px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.card-front {
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    transition: transform 0.5s ease;
+}
+
+.card.active:hover .card-front img {
+    transform: scale(1.03);
+}
+
+.card-back {
+    background: rgba(15, 15, 15, 0.98);
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 30px;
+    text-align: center;
+    border: 2px solid #11f75e;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+}
+
+.card-back h3 {
+    font-size: 24px;
+    color: #11f75e;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.card-back p {
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.arrow {
+    position: absolute;
+    font-size: 45px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    z-index: 25;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    user-select: none;
+}
+
+.arrow:hover {
+    background: #11f75e;
+    color: #000;
+    border-color: #11f75e;
+    transform: scale(1.1);
+}
+
+.left {
+    left: 60px;
+}
+
+.right {
+    right: 60px;
+}
 
 @media (max-width: 768px) {
-    
+
     .navbar {
-        padding: 15px 20px;
+        padding: 20px;
         flex-direction: column;
-        gap: 12px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4));
+        gap: 15px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), transparent);
     }
 
     .navbar nav {
@@ -16,48 +268,44 @@
     }
 
     .navbar nav a {
-        margin: 0 5px;
+        margin: 0 8px;
         font-size: 13px;
     }
 
     .btn-book {
-        padding: 6px 18px;
+        padding: 8px 20px;
         font-size: 13px;
+        width: 80%;
     }
 
     .main-text {
-        top: 140px;
-        width: 100%;
-        padding: 0 10px;
+        top: 165px;
     }
 
     .main-text h1 {
-        font-size: 28px !important;
-        letter-spacing: 1px !important;
+        font-size: 26px;
+        letter-spacing: 1px;
         line-height: 1.2;
     }
 
     .main-text p {
-        margin-top: 5px;
-        font-size: 14px !important;
-    }
-    
-    .hero {
-        perspective: 1000px;
+        margin-top: 6px;
+        font-size: 13px;
+        letter-spacing: 1px;
     }
 
     .carousel {
-        height: 400px;
-        margin-top: 80px;
+        height: 380px;
+        margin-top: 140px;
     }
 
     .card {
         width: 220px;
-        height: 340px;
+        height: 330px;
     }
 
     .card-back {
-        padding: 15px;
+        padding: 20px 15px;
     }
 
     .card-back h3 {
@@ -71,15 +319,18 @@
     }
 
     .arrow {
-        font-size: 40px;
-        bottom: 30px;
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        bottom: 25px;
+        top: auto;
     }
 
     .left {
-        left: 35px;
+        left: 30px;
     }
 
     .right {
-        right: 35px;
+        right: 30px;
     }
 }
