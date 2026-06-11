@@ -268,31 +268,47 @@ body {
 }
 
 @media (max-width: 768px) {
-    .about-header h1 {
-        font-size: 36px;
-        letter-spacing: 3px;
+
+    .footer-container,
+    .info-sections-container,
+    .contact-grid,
+    main .about-content-box {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 35px !important;
+        padding: 30px 15px !important;
     }
 
-    .about-content-box {
-        padding: 30px 20px;
+    .atencion-cliente,
+    .nuestra-ubicacion,
+    .siguenos,
+    .info-box,
+    .footer-column {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        margin: 0 0 15px 0 !important;
+        display: block !important;
+        float: none !important;
     }
 
-    .about-content-box p {
-        font-size: 15.5px;
-        line-height: 1.8;
+    .nuestra-ubicacion iframe,
+    .nuestra-ubicacion img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 200px;
+        border-radius: 8px;
     }
 
-    .back-home-container {
-        position: relative;
-        top: 0;
-        margin-bottom: 30px;
-    }
-
-    .about-section {
-        padding-top: 50px;
-    }
-
-    .ocean-animation {
-        bottom: 5%;
+    .siguenos .social-icons,
+    .siguenos ul {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 20px !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 }
