@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Becquer - Esparcimiento Náutico</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">B</div>
+        <nav>
+            <a href="trabaja.html">Trabaja con nosotros</a>
+            <a href="ayuda.html">Ayuda</a>
+            <a href="nosotros.html">Nosotros</a>
+        </nav>
+        <button class="btn-book">Reservar</button>
+    </header>
+
+    <section class="hero">
+
+        <div class="background"></div>
+        <div class="dark-overlay"></div>
+
+        <div class="main-text">
+            <h1 id="title">Esparcimiento náutico<br>ANCON</h1>
+            <p id="subtitle">A piece of heaven</p>
+        </div>
+
+        <div class="carousel">
+
+            <div class="card" data-title="kayac" data-sub="Aventura Marina">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img3.jpg" alt="kayac"></div>
+                    <div class="card-back">
+                        <h3>kayac</h3>
+                        <p>Explora de cerca los paisajes marinos más impresionantes con un recorrido dinámico e
+                            individual.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Bote a pedales" data-sub="Relajo Familiar">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img4.avif" alt="Bote a pedales"></div>
+                    <div class="card-back">
+                        <h3>Bote a pedales</h3>
+                        <p>Perfecto para un paseo tranquilo en pareja o en familia disfrutando del sol y la calma del
+                            agua.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Paddle surf" data-sub="Equilibrio Total">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img5.jpg" alt="Paddle surf"></div>
+                    <div class="card-back">
+                        <h3>Paddle surf</h3>
+                        <p>Prueba tu destreza y equilibrio deslizándote de pie sobre la superficie de las olas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Wake surf" data-sub="Adrenalina pura">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img6.jpg" alt="Wake surf"></div>
+                    <div class="card-back">
+                        <h3>Wake surf</h3>
+                        <p>Siente la potencia del motor mientras dominas la estela y surfeas las olas de forma continua.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Inflable giratorio" data-sub="Diversión Extrema">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img7.avif" alt="Inflable giratorio"></div>
+                    <div class="card-back">
+                        <h3>Inflable giratorio</h3>
+                        <p>Risas garantizadas girando a toda velocidad sobre el agua junto a tus amigos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Banana" data-sub="Clásico Grupal">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img2.jpg" alt="Banana"></div>
+                    <div class="card-back">
+                        <h3>Banana</h3>
+                        <p>El juego grupal por excelencia donde el objetivo es resistir las curvas sin caer al agua.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Lancha" data-sub="Velocidad">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img8.avif" alt="Lancha"></div>
+                    <div class="card-back">
+                        <h3>Lancha</h3>
+                        <p>Recorre largas distancias en poco tiempo y siente la brisa marina con la máxima aceleración.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Mini yate" data-sub="Tour Privado">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img9. Contattaci per prenotare il tuo tour privato___"
+                            alt="Mini yate"></div>
+                    <div class="card-back">
+                        <h3>Mini yate</h3>
+                        <p>Reserva un espacio íntimo con servicio a bordo para celebraciones especiales o paseos
+                            exclusivos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Velero" data-sub="Aventura Eólica">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img10.jpg" alt="Velero"></div>
+                    <div class="card-back">
+                        <h3>Velero</h3>
+                        <p>Conéctate con la naturaleza utilizando únicamente la fuerza del viento para guiar tu viaje.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-title="Yate" data-sub="Máximo Lujo">
+                <div class="card-inner">
+                    <div class="card-front"><img src="img/img1.jpg" alt="Yate"></div>
+                    <div class="card-back">
+                        <h3>Yate</h3>
+                        <p>La experiencia definitiva de confort y elegancia en alta mar para grupos exigentes.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="arrow left">&#10094;</button>
+        <button class="arrow right">&#10095;</button>
+
+    </section>
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+        const bg = document.querySelector(".background");
+        const title = document.getElementById("title");
+        const subtitle = document.getElementById("subtitle");
+        const left = document.querySelector(".left");
+        const right = document.querySelector(".right");
+
+        let current = 0;
+
+        function updateCarousel() {
+            const isMobile = window.innerWidth <= 768;
+            const separation = isMobile ? 180 : 280;
+
+            cards.forEach((card, i) => {
+                const offset = i - current;
+                card.classList.remove("active");
+
+                if (offset === 0) {
+                    card.classList.add("active");
+                    card.style.transform = `translateX(0) rotateY(0deg) scale(1)`;
+                    card.style.zIndex = 10;
+                    card.style.opacity = 1;
+
+                    const frontalImg = card.querySelector(".card-front img");
+                    if (frontalImg) {
+                        bg.style.backgroundImage = `url(${frontalImg.src})`;
+                    }
+
+                    title.style.opacity = 0;
+                    subtitle.style.opacity = 0;
+
+                    setTimeout(() => {
+                        title.innerHTML = card.dataset.title;
+                        subtitle.innerHTML = card.dataset.sub;
+                        title.style.opacity = 1;
+                        subtitle.style.opacity = 1;
+                    }, 300);
+
+                } else {
+                    const direction = offset < 0 ? 1 : -1;
+                    card.style.transform = `translateX(${offset * separation}px) rotateY(${direction * 45}deg) scale(0.85)`;
+                    card.style.zIndex = 5 - Math.abs(offset);
+                    card.style.opacity = isMobile ? (Math.abs(offset) === 1 ? 0.3 : 0) : 0.6;
+                }
+            });
+        }
+
+        function limpiarVolteos() {
+            cards.forEach(card => card.classList.remove("flipped"));
+        }
+
+        function next() {
+            limpiarVolteos();
+            current = (current + 1) % cards.length;
+            updateCarousel();
+        }
+
+        function prev() {
+            limpiarVolteos();
+            current = (current - 1 + cards.length) % cards.length;
+            updateCarousel();
+        }
+
+        right.onclick = next;
+        left.onclick = prev;
+
+        cards.forEach((card, index) => {
+            card.addEventListener("click", () => {
+                if (index === current) {
+                    card.classList.toggle("flipped");
+
+                    if (card.classList.contains("flipped")) {
+                        title.style.opacity = 0;
+                        subtitle.style.opacity = 0;
+                    } else {
+                        title.style.opacity = 1;
+                        subtitle.style.opacity = 1;
+                    }
+                } else {
+                    limpiarVolteos();
+                    current = index;
+                    updateCarousel();
+                }
+            });
+        });
+
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
+    </script>
+
+</body>
+
+</html>
