@@ -108,7 +108,7 @@
 
             <div class="card" data-title="Mini yate" data-sub="Tour Privado">
                 <div class="card-inner">
-                    <div class="card-front"><img src="img/img9. Contattaci per prenotare il tuo tour privato___"
+                    <div class="card-front"><img src="img/img9. Contattaci per prenotare il tuo tour privado___"
                             alt="Mini yate"></div>
                     <div class="card-back">
                         <h3>Mini yate</h3>
@@ -157,6 +157,9 @@
         let current = 0;
 
         function updateCarousel() {
+            const isMobile = window.innerWidth <= 768;
+            const separation = isMobile ? 180 : 280;
+
             cards.forEach((card, i) => {
                 const offset = i - current;
                 card.classList.remove("active");
@@ -184,9 +187,9 @@
 
                 } else {
                     const direction = offset < 0 ? 1 : -1;
-                    card.style.transform = `translateX(${offset * 280}px) rotateY(${direction * 45}deg) scale(0.85)`;
+                    card.style.transform = `translateX(${offset * separation}px) rotateY(${direction * 45}deg) scale(0.85)`;
                     card.style.zIndex = 5 - Math.abs(offset);
-                    card.style.opacity = 0.6;
+                    card.style.opacity = isMobile ? (Math.abs(offset) === 1 ? 0.3 : 0) : 0.6;
                 }
             });
         }
@@ -230,6 +233,7 @@
             });
         });
 
+        window.addEventListener('resize', updateCarousel);
         updateCarousel();
     </script>
 
