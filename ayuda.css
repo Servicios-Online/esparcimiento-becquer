@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.back-home-container {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.btn-back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    backdrop-filter: blur(5px);
+}
+
+.btn-back-home:hover {
+    color: #000;
+    background: #11f75e;
+    border-color: #11f75e;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(17, 247, 94, 0.2);
+}
+
+@media (max-width: 768px) {
+    .back-home-container {
+        position: relative;
+        top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .help-section {
+        padding-top: 20px;
+    }
+}
+
+body {
+    background: #000;
+    color: white;
+}
+
+.help-section {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #000000, #0a0a0a);
+    padding: 80px 20px;
+}
+
+.help-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.help-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.help-header h2 {
+    font-size: 42px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.help-header p {
+    font-size: 16px;
+    color: #888;
+}
+
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 10px;
+}
+
+.help-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.help-card:hover {
+    transform: translateY(-10px);
+    border-color: #11f75e;
+    box-shadow: 0 30px 60px rgba(17, 247, 94, 0.1);
+}
+
+.card-icon {
+    font-size: 35px;
+    color: #11f75e;
+    margin-bottom: 20px;
+}
+
+.help-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.help-card p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.contact-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.contact-item:hover {
+    background: rgba(17, 247, 94, 0.1);
+    color: #11f75e;
+}
+
+.contact-item i {
+    font-size: 18px;
+}
+
+.map-container {
+    width: 100%;
+    margin-top: auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-btn:hover {
+    transform: scale(1.15);
+    color: #000;
+}
+
+.social-btn.facebook:hover {
+    background: #1877f2;
+}
+
+.social-btn.instagram:hover {
+    background: #e1306c;
+}
+
+.social-btn.tiktok:hover {
+    background: #fff;
+    color: #000;
+}
+
+.social-btn.youtube:hover {
+    background: #ff0000;
+}
+
+@media (max-width: 768px) {
+    .help-header h2 {
+        font-size: 32px;
+    }
+
+    .help-grid {
+        grid-template-columns: 1fr;
+    }
+}
