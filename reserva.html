@@ -37,19 +37,19 @@
 
             <div class="calendar-grid days" id="calendar-days"></div>
 
-            <h4>Seleccione Servicio</h4>
+           <h4>Seleccione Servicio</h4>
 
 <div class="service-selector">
     <select id="service-select">
         <option value="">Seleccione un servicio</option>
         <option value="Kayac">🚣 Kayac</option>
         <option value="Bote a pedales">🚲 Bote a pedales</option>
-        <option value="Paddle surf">🏄 Paddle Surf</option>
-        <option value="Wake surf">🌊 Wake Surf</option>
+        <option value="Paddle Surf">🏄 Paddle Surf</option>
+        <option value="Wake Surf">🌊 Wake Surf</option>
         <option value="Inflable giratorio">🎡 Inflable giratorio</option>
         <option value="Banana">🍌 Banana</option>
         <option value="Lancha">🚤 Lancha</option>
-        <option value="Mini yate">🛥️ Mini Yate</option>
+        <option value="Mini Yate">🛥️ Mini Yate</option>
         <option value="Velero">⛵ Velero</option>
         <option value="Yate">🛳️ Yate</option>
     </select>
@@ -129,142 +129,182 @@
     </footer>
 
 
-    <script>
-        const calendarTitle = document.getElementById("calendar-title");
-        const calendarDays = document.getElementById("calendar-days");
-        const prevMonthButton = document.getElementById("prev-month");
-        const nextMonthButton = document.getElementById("next-month");
-        const schedules = document.querySelectorAll(".schedules button");
-        const summary = document.getElementById("booking-summary");
-        const bookButton = document.querySelector(".book-btn");
+   <script>
+    const calendarTitle = document.getElementById("calendar-title");
+    const calendarDays = document.getElementById("calendar-days");
+    const prevMonthButton = document.getElementById("prev-month");
+    const nextMonthButton = document.getElementById("next-month");
 
+    const schedules = document.querySelectorAll(".schedules button");
+    const summary = document.getElementById("booking-summary");
+    const bookButton = document.querySelector(".book-btn");
 
-        const monthNames = [
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        ];
-        const weekdayNames = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+    const serviceSelect = document.getElementById("service-select");
 
+    const monthNames = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
 
-        let visibleDate = new Date(today.getFullYear(), today.getMonth(), 1);
-        let selectedDate = "";
-        let selectedTime = document.querySelector(".schedules .active")?.textContent.trim() || "";
+    const weekdayNames = [
+        "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"
+    ];
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-        function setActive(buttons, selectedButton) {
-            buttons.forEach((button) => button.classList.remove("active"));
-            selectedButton.classList.add("active");
+    let visibleDate = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+    );
+
+    let selectedDate = "";
+    let selectedService = "";
+    let selectedTime =
+        document.querySelector(".schedules .active")?.textContent.trim() || "";
+
+    function setActive(buttons, selectedButton) {
+        buttons.forEach(button => button.classList.remove("active"));
+        selectedButton.classList.add("active");
+    }
+
+    function formatSelectedDate(date) {
+        const weekday = weekdayNames[date.getDay()];
+        const month = monthNames[date.getMonth()];
+
+        return `${weekday} ${date.getDate()} de ${month}`;
+    }
+
+    function updateSummary() {
+
+        if (!selectedService || !selectedDate) {
+            summary.textContent =
+                "Selecciona servicio, fecha y hora";
+            return;
         }
 
+        summary.textContent =
+            `${selectedService} | ${selectedDate} | ${selectedTime}`;
+    }
 
-        function formatSelectedDate(date) {
-            const weekday = weekdayNames[date.getDay()];
-            const month = monthNames[date.getMonth()];
-            return `${weekday} ${date.getDate()} de ${month}`;
+    function renderCalendar() {
+
+        calendarDays.innerHTML = "";
+
+        calendarTitle.textContent =
+            `${monthNames[visibleDate.getMonth()]} ${visibleDate.getFullYear()}`;
+
+        const year = visibleDate.getFullYear();
+        const month = visibleDate.getMonth();
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+
+        const startOffset = (firstDay.getDay() + 6) % 7;
+
+        for (let i = 0; i < startOffset; i++) {
+            const emptyCell = document.createElement("span");
+            emptyCell.className = "calendar-empty";
+            calendarDays.appendChild(emptyCell);
         }
 
+        for (let day = 1; day <= lastDay.getDate(); day++) {
 
-        function updateSummary() {
-            if (!selectedDate) {
-                summary.textContent = "Selecciona fecha y hora";
-                return;
+            const date = new Date(year, month, day);
+
+            const dayButton = document.createElement("button");
+
+            dayButton.type = "button";
+            dayButton.className = "day";
+            dayButton.textContent = day;
+
+            if (date < today) {
+                dayButton.disabled = true;
+                dayButton.classList.add("past");
             }
 
-
-            summary.textContent = `${selectedDate} - ${selectedTime}`;
-        }
-
-
-        function renderCalendar() {
-            calendarDays.innerHTML = "";
-            calendarTitle.textContent = `${monthNames[visibleDate.getMonth()]} ${visibleDate.getFullYear()}`;
-
-
-            const year = visibleDate.getFullYear();
-            const month = visibleDate.getMonth();
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startOffset = (firstDay.getDay() + 6) % 7;
-
-
-            for (let i = 0; i < startOffset; i++) {
-                const emptyCell = document.createElement("span");
-                emptyCell.className = "calendar-empty";
-                calendarDays.appendChild(emptyCell);
+            if (selectedDate === formatSelectedDate(date)) {
+                dayButton.classList.add("active");
             }
 
-
-            for (let day = 1; day <= lastDay.getDate(); day++) {
-                const date = new Date(year, month, day);
-                const dayButton = document.createElement("button");
-                dayButton.type = "button";
-                dayButton.className = "day";
-                dayButton.textContent = day;
-
-
-                if (date < today) {
-                    dayButton.disabled = true;
-                    dayButton.classList.add("past");
-                }
-
-
-                if (selectedDate === formatSelectedDate(date)) {
-                    dayButton.classList.add("active");
-                }
-
-
-                dayButton.addEventListener("click", () => {
-                    selectedDate = formatSelectedDate(date);
-                    renderCalendar();
-                    updateSummary();
-                });
-
-
-                calendarDays.appendChild(dayButton);
-            }
-
-
-            prevMonthButton.disabled =
-                visibleDate.getFullYear() === today.getFullYear() &&
-                visibleDate.getMonth() === today.getMonth();
-        }
-
-
-        prevMonthButton.addEventListener("click", () => {
-            visibleDate = new Date(visibleDate.getFullYear(), visibleDate.getMonth() - 1, 1);
-            renderCalendar();
-        });
-
-
-        nextMonthButton.addEventListener("click", () => {
-            visibleDate = new Date(visibleDate.getFullYear(), visibleDate.getMonth() + 1, 1);
-            renderCalendar();
-        });
-
-
-        schedules.forEach((schedule) => {
-            schedule.addEventListener("click", () => {
-                setActive(schedules, schedule);
-                selectedTime = schedule.textContent.trim();
+            dayButton.addEventListener("click", () => {
+                selectedDate = formatSelectedDate(date);
+                renderCalendar();
                 updateSummary();
             });
-        });
 
+            calendarDays.appendChild(dayButton);
+        }
 
-        bookButton.addEventListener("click", () => {
-            if (!selectedDate) {
-                alert("Primero selecciona una fecha para tu reserva.");
-                return;
-            }
-            alert(`Reserva confirmada para ${selectedDate} a las ${selectedTime}.`);
-        });
+        prevMonthButton.disabled =
+            visibleDate.getFullYear() === today.getFullYear() &&
+            visibleDate.getMonth() === today.getMonth();
+    }
 
+    prevMonthButton.addEventListener("click", () => {
+        visibleDate = new Date(
+            visibleDate.getFullYear(),
+            visibleDate.getMonth() - 1,
+            1
+        );
 
         renderCalendar();
+    });
+
+    nextMonthButton.addEventListener("click", () => {
+        visibleDate = new Date(
+            visibleDate.getFullYear(),
+            visibleDate.getMonth() + 1,
+            1
+        );
+
+        renderCalendar();
+    });
+
+    serviceSelect.addEventListener("change", () => {
+        selectedService = serviceSelect.value;
         updateSummary();
-    </script>
+    });
+
+    schedules.forEach((schedule) => {
+
+        schedule.addEventListener("click", () => {
+
+            setActive(schedules, schedule);
+
+            selectedTime =
+                schedule.textContent.trim();
+
+            updateSummary();
+        });
+
+    });
+
+    bookButton.addEventListener("click", () => {
+
+        if (!selectedService) {
+            alert("Selecciona un servicio.");
+            return;
+        }
+
+        if (!selectedDate) {
+            alert("Selecciona una fecha.");
+            return;
+        }
+
+        alert(
+`Reserva confirmada
+
+Servicio: ${selectedService}
+Fecha: ${selectedDate}
+Hora: ${selectedTime}`
+        );
+    });
+
+    renderCalendar();
+    updateSummary();
+</script>
 </body>
 
 </html>
