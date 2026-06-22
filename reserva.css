@@ -48,6 +48,26 @@ body {
     display: inline-block;
 }
 
+.service-selector {
+    margin: 12px 0 24px;
+}
+
+.service-selector select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+}
+
+.service-selector select option {
+    background: #111;
+    color: white;
+}
 
 .hero {
     height: 100vh;
