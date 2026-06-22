@@ -60,8 +60,6 @@ body {
     background: rgba(255,255,255,0.12);
     color: white;
     font-size: 15px;
-    outline: none;
-    cursor: pointer;
 }
 
 .service-selector select option {
