@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Page</title>
+    <link rel="stylesheet" href="reserva.css">
+</head>
+
+<body class="reservation-body">
+    <main class="appointment-page">
+        <div class="logo"> <br>Becker</br> </div>
+        <h2>Reserva tu Cita</h2>
+        <p>www.deportesbecker.com</p>
+
+
+        <section class="calendar">
+            <div class="calendar-header">
+                <button class="calendar-nav" id="prev-month" type="button" aria-label="Mes anterior">&#10094;</button>
+                <h3 id="calendar-title">Mes</h3>
+                <button class="calendar-nav" id="next-month" type="button" aria-label="Mes siguiente">&#10095;</button>
+            </div>
+
+
+            <div class="calendar-grid weekdays" aria-hidden="true">
+                <span>Lun</span>
+                <span>Mar</span>
+                <span>Mie</span>
+                <span>Jue</span>
+                <span>Vie</span>
+                <span>Sab</span>
+                <span>Dom</span>
+            </div>
+
+
+            <div class="calendar-grid days" id="calendar-days"></div>
+
+
+            <h4>Seleccione Hora</h4>
+            <div class="schedules">
+                <button class="active">08:00 am</button>
+                <button>09:00 am</button>
+                <button>10:00 am</button>
+                <button>11:00 am</button>
+                <button>12:00 pm</button>
+                <button>03:00 pm</button>
+                <button>04:00 pm</button>
+                <button>05:00 pm</button>
+                <button>06:00 pm</button>
+            </div>
+
+
+            <div class="booking-summary" aria-live="polite">
+                <p>Tu reserva:</p>
+                <strong id="booking-summary">Selecciona fecha y hora</strong>
+            </div>
+
+
+            <button class="book-btn" type="button">Reservar Cita</button>
+        </section>
+
+
+        <h4>Nosotros</h4>
+        <div class="tabs">
+            <a href="#about">😃 Conocenos</a>
+            <a href="#reviews">📄 Opiniones</a>
+            <a href="#services">🤿 Servicios</a>
+        </div>
+
+
+        <section class="tab-content">
+
+
+            <div id="about" class="section">
+                <p> Empresa especializada en deportes de aventura acuaticos,
+                    con mas de 10 años de experiencia.
+
+
+                </p>
+            </div>
+
+            <div id="reviews" class="section">
+                <ul>
+                    <li>📄 "Excelente Servicio"</li>
+                    <li>📄 "Momentos inolvidables"</li>
+                    <li>📄 "Recomendado 100%" </li>
+                </ul>
+            </div>
+
+            <div id="services" class="section">
+                <ul>
+                    <li> <span>🚣</span> Deportes de aventura</li>
+                    <li> <span>🤿</span> Paseos en bote</li>
+                    <li> <span>⭐</span> Mucho más</li>
+                </ul>
+            </div>
+
+
+        </section>
+    </main>
+
+
+    <footer class="footer-nav">
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="tel:+51999999999" class="nav-link">Llamanos</a>
+            <a href="reserva.html" class="nav-link">Citas</a>
+        </nav>
+    </footer>
+
+
+    <script>
+        const calendarTitle = document.getElementById("calendar-title");
+        const calendarDays = document.getElementById("calendar-days");
+        const prevMonthButton = document.getElementById("prev-month");
+        const nextMonthButton = document.getElementById("next-month");
+        const schedules = document.querySelectorAll(".schedules button");
+        const summary = document.getElementById("booking-summary");
+        const bookButton = document.querySelector(".book-btn");
+
+
+        const monthNames = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        const weekdayNames = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+
+        let visibleDate = new Date(today.getFullYear(), today.getMonth(), 1);
+        let selectedDate = "";
+        let selectedTime = document.querySelector(".schedules .active")?.textContent.trim() || "";
+
+
+        function setActive(buttons, selectedButton) {
+            buttons.forEach((button) => button.classList.remove("active"));
+            selectedButton.classList.add("active");
+        }
+
+
+        function formatSelectedDate(date) {
+            const weekday = weekdayNames[date.getDay()];
+            const month = monthNames[date.getMonth()];
+            return `${weekday} ${date.getDate()} de ${month}`;
+        }
+
+
+        function updateSummary() {
+            if (!selectedDate) {
+                summary.textContent = "Selecciona fecha y hora";
+                return;
+            }
+
+
+            summary.textContent = `${selectedDate} - ${selectedTime}`;
+        }
+
+
+        function renderCalendar() {
+            calendarDays.innerHTML = "";
+            calendarTitle.textContent = `${monthNames[visibleDate.getMonth()]} ${visibleDate.getFullYear()}`;
+
+
+            const year = visibleDate.getFullYear();
+            const month = visibleDate.getMonth();
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startOffset = (firstDay.getDay() + 6) % 7;
+
+
+            for (let i = 0; i < startOffset; i++) {
+                const emptyCell = document.createElement("span");
+                emptyCell.className = "calendar-empty";
+                calendarDays.appendChild(emptyCell);
+            }
+
+
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const date = new Date(year, month, day);
+                const dayButton = document.createElement("button");
+                dayButton.type = "button";
+                dayButton.className = "day";
+                dayButton.textContent = day;
+
+
+                if (date < today) {
+                    dayButton.disabled = true;
+                    dayButton.classList.add("past");
+                }
+
+
+                if (selectedDate === formatSelectedDate(date)) {
+                    dayButton.classList.add("active");
+                }
+
+
+                dayButton.addEventListener("click", () => {
+                    selectedDate = formatSelectedDate(date);
+                    renderCalendar();
+                    updateSummary();
+                });
+
+
+                calendarDays.appendChild(dayButton);
+            }
+
+
+            prevMonthButton.disabled =
+                visibleDate.getFullYear() === today.getFullYear() &&
+                visibleDate.getMonth() === today.getMonth();
+        }
+
+
+        prevMonthButton.addEventListener("click", () => {
+            visibleDate = new Date(visibleDate.getFullYear(), visibleDate.getMonth() - 1, 1);
+            renderCalendar();
+        });
+
+
+        nextMonthButton.addEventListener("click", () => {
+            visibleDate = new Date(visibleDate.getFullYear(), visibleDate.getMonth() + 1, 1);
+            renderCalendar();
+        });
+
+
+        schedules.forEach((schedule) => {
+            schedule.addEventListener("click", () => {
+                setActive(schedules, schedule);
+                selectedTime = schedule.textContent.trim();
+                updateSummary();
+            });
+        });
+
+
+        bookButton.addEventListener("click", () => {
+            if (!selectedDate) {
+                alert("Primero selecciona una fecha para tu reserva.");
+                return;
+            }
+            alert(`Reserva confirmada para ${selectedDate} a las ${selectedTime}.`);
+        });
+
+
+        renderCalendar();
+        updateSummary();
+    </script>
+</body>
+
+</html>
